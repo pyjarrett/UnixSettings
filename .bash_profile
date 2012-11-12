@@ -109,3 +109,19 @@ function ff { osascript -e 'tell application "Finder"'\
 
 function cdff { cd "`ff $@`"; };
 
+alias ls='ls -G'
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+alias egrep='egrep --color'
+
+export PATH=$PATH:/opt/local/bin
+export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
+export PROJECT_HOME=/Users/jarrett/Projects/
+
+# Simple prompt.
+#export PS1="\n[\u@\h \W]\$ "
+export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
+
+# Removed to see if it will break anything.
+#export VIM_APP_DIR=/Applications/
+
+
