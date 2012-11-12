@@ -1,60 +1,35 @@
+" Tabbing
 set tabstop=4
 set shiftwidth=4
 set ts=4    
-colorscheme desert
-set guioptions-=T " disables toolbar
-set incsearch
+set expandtab
 
-
+" Get rid of annoying bells
 set noerrorbells visualbell t_vb=
 
-
-
-" Enable LEXT syntax highlighting
-"let mysyntaxfile = "/Users/pauljarrett/Studio/lext/lext/lext.vim"
-syntax on
-au BufRead,BufNewFile *.lext set filetype=lext
-au! Syntax lext source /Users/pauljarrett/Studio/lext/lext/lext.vim
-
-
-"let mysyntaxfile = "/Users/pauljarrett/Studio/scythe/scythe.vim"
-au BufRead,BufNewFile *.scy set filetype=scy
-au! Syntax scy source /Users/pauljarrett/Studio/scythe/scythe.vim
-
-
-"let mysyntaxfile = "/Users/pauljarrett/Studio/scythe/polyglot.vim"
-au BufRead,BufNewFile *.poly set filetype=poly
-au! Syntax poly source /Users/pauljarrett/Studio/scythe/poly.vim
-
-colorscheme desert
-set tabstop=4
-set shiftwidth=4
-set expandtab
-syntax on
-set autoindent
-set foldmethod=indent
-set foldlevel=1
+" Search
 set incsearch
 set hlsearch
 
+" Pretty formatting for gq
 set textwidth=80
 
+" Display 
+colorscheme desert
+syntax on
+
+" Folding
+set autoindent
+set foldmethod=indent
+set foldlevel=1
 set gfn=Menlo\ Regular:h11
 
+" Enables looking up functions while still in vim
 runtime! ftplugin/man.vim
 
+" Removes menu and tab bars when graphical
 if has("gui_running")
   set guioptions-=m
   set guioptions-=T
 endif
-
-syntax on
-au BufRead,BufNewFile *.scy set filetype=scy
-au! Syntax scy source /Users/jarrett/Projects/scythe/scythe.vim
-
-au BufRead,BufNewFile *.fsh set filetype=glsl
-au BufRead,BufNewFile *.vsh set filetype=glsl
-
-au BufRead,BufNewFile *.design set filetype=design
-au! Syntax design source /Users/jarrett/Projects/scythe/design.vim
 

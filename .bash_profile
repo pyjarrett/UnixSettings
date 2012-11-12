@@ -6,8 +6,10 @@
 # My old style prompt
 #PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;36m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 #PS1='\n \[\e[0;32m\]\u\[\e[m\] \[\e[1;36m\]\w\[\e[m\] :\n [\@] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
-PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
-
+# Simple prompt.
+#export PS1="\n[\u@\h \W]\$ "
+#export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
+export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
 
 # \u User name
 # \w Full path
@@ -40,34 +42,13 @@ PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1
 #\] end a sequence of non-printing character
 
 
-
-
-
-
 ################################################################################
 #
 #                                       MacPorts  
 #
-# Your previous /Users/pauljarrett/.bash_profile file was backed up as
-# /Users/pauljarrett/.bash_profile.macports-saved_2010-10-16_at_19:57:42
-#
-# MacPorts Installer addition on 2010-10-16_at_19:57:42: adding an appropriate PATH variable for use with MacPorts.
-# Finished adapting your PATH environment variable for use with MacPorts.
 ################################################################################
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
-
-
-################################################################################
-#
-#                                       Subversion
-#  
-# Subversion additions to make SVN sane.
-#
-################################################################################
-export SVN_EDITOR=vi
-export PATH=/opt/subversion/bin/:$PATH
-
+export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
 
 
 ################################################################################
@@ -78,50 +59,7 @@ export PATH=/opt/subversion/bin/:$PATH
 
 # Use colors when outputting for ls
 alias ls='ls -G'
-
-# Allow jumping to my master code checkout repository
-alias masterCodeDirectory='cd ~/Documents/Development/Master\ Code/'
-
-# Immediately open namespace list from master code
-alias daesDocs='open file:///Users/pauljarrett/Documents/Development/Master%20Code/docs/html/namespaces.html'
-
-
-################################################################################
-#                                       MAC_VIM (MAKING IT BEHAVE LIKE GVIM)   
-################################################################################
-# Set target directory variable for mvim script
-export VIM_APP_DIR=/Applications/
-
-# Call mvim startup script in /usr/local/bin/
-alias gvim='mvim'
-
-################################################################################
-#
-#                                       Working with Finder 
-#
-################################################################################
-# Cd to the current top finder window
-function ff { osascript -e 'tell application "Finder"'\
- -e "if (${1-1} <= (count Finder windows)) then"\
- -e "get POSIX path of (target of window ${1-1} as alias)"\
- -e 'else' -e 'get POSIX path of (desktop as alias)'\
- -e 'end if' -e 'end tell'; };\
-
-function cdff { cd "`ff $@`"; };
-
-alias ls='ls -G'
 alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 alias egrep='egrep --color'
-
-export PATH=$PATH:/opt/local/bin
-export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
-export PROJECT_HOME=/Users/jarrett/Projects/
-
-# Simple prompt.
-#export PS1="\n[\u@\h \W]\$ "
-export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
-
-# Removed to see if it will break anything.
-#export VIM_APP_DIR=/Applications/
 
 
