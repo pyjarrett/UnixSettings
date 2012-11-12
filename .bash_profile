@@ -8,8 +8,15 @@
 #PS1='\n \[\e[0;32m\]\u\[\e[m\] \[\e[1;36m\]\w\[\e[m\] :\n [\@] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 # Simple prompt.
 #export PS1="\n[\u@\h \W]\$ "
-#export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
-export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
+
+if [ $USER == "pauljarrett" ] # Desktop specific settings
+then
+    # My desktop terminal is black... this makes it easier to read.
+    export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
+else
+    # I use a sand-colored laptop terminal
+    export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
+fi
 
 # \u User name
 # \w Full path
