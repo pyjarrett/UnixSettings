@@ -54,7 +54,7 @@ fi
 #                                       MacPorts  
 #
 ################################################################################
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:~/Projects/enzyme/:$PATH
 export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
 
 
@@ -66,7 +66,5 @@ export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
 
 # Use colors when outputting for ls
 alias ls='ls -G'
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 alias egrep='egrep --color'
-
-
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
