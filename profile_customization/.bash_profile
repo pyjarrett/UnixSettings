@@ -16,6 +16,13 @@ then
 else
     # I use a sand-colored laptop terminal
     export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
+
+    if [ $OSTYPE == "linux-gnu" ]
+    then :
+    else
+        # I also use a specific app for gvim
+        alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+    fi
 fi
 
 # \u User name
@@ -66,7 +73,4 @@ export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
 
 # Use colors when outputting for ls
 alias ls='ls -G'
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 alias egrep='egrep --color'
-
-
