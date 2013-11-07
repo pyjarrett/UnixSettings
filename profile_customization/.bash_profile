@@ -8,22 +8,7 @@
 #PS1='\n \[\e[0;32m\]\u\[\e[m\] \[\e[1;36m\]\w\[\e[m\] :\n [\@] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 # Simple prompt.
 #export PS1="\n[\u@\h \W]\$ "
-
-if [ $USER == "pauljarrett" ] # Desktop specific settings
-then
-    # My desktop terminal is black... this makes it easier to read.
-    export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
-else
-    # I use a sand-colored laptop terminal
-    export PS1="\n---------------------------------------------------------------------------\n\u \A \n\W/\n\$ "
-
-    if [ $OSTYPE == "linux-gnu" ]
-    then :
-    else
-        # I also use a specific app for gvim
-        alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-    fi
-fi
+#export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
 
 # \u User name
 # \w Full path
@@ -58,11 +43,19 @@ fi
 
 ################################################################################
 #
-#                                       MacPorts  
+#                                 OS SPECIFIC SETTINGS                                    
 #
 ################################################################################
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
+os=`uname`
+if [ $OSTYPE == "Linux" ]
+then :
+else
+    # Update paths because mac can't store things in simple locations
+    alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+    export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
+    # Searches for MacPorts programs 
+    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+fi
 
 
 ################################################################################

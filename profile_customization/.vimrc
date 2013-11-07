@@ -14,13 +14,15 @@ set hlsearch
 " Pretty formatting for gq
 set textwidth=80
 
-" Enable syntax 
+" Display 
+colorscheme desert
 syntax on
 
 " Folding
 set autoindent
 set foldmethod=indent
 set foldlevel=1
+set gfn=Courier\ 10\ Pitch\ 9
 
 " Saves a bunch of things when saving sessions
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
@@ -32,8 +34,6 @@ runtime! ftplugin/man.vim
 " Sets NETRW to use tree style
 let g:netrw_liststyle=3
 
-" Setting the font
-set gfn=Courier\ 10\ Pitch\ 9
 if(hostname()=="theodicy")
   colorscheme solarized
   set gfn=UbuntuMono\ 10
