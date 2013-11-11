@@ -1,7 +1,7 @@
 " Tabbing
 set tabstop=4
 set shiftwidth=4
-set ts=4    
+set ts=4
 set expandtab
 
 " Get rid of annoying bells
@@ -15,7 +15,8 @@ set hlsearch
 set textwidth=80
 
 " Display 
-colorscheme desert
+"colorscheme desert (Kept so I always remember my former color scheme)
+colorscheme solarized
 syntax on
 
 " Folding
@@ -35,13 +36,12 @@ runtime! ftplugin/man.vim
 let g:netrw_liststyle=3
 
 if(hostname()=="theodicy")
-  colorscheme solarized
-  set gfn=UbuntuMono\ 10
+    set gfn=UbuntuMono\ 10
 endif
 
 " Removes menu and tab bars when graphical
 if has("gui_running")
-  set guioptions-=m
-  set guioptions-=T
+    set guioptions-=m
+    set guioptions-=T
 endif
 

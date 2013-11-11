@@ -1,6 +1,5 @@
 ################################################################################
 #                                       Prompt changes
-#  
 # Change the command line prompt
 ################################################################################
 # My old style prompt
@@ -9,6 +8,8 @@
 # Simple prompt.
 #export PS1="\n[\u@\h \W]\$ "
 #export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
+#export PS1='\n\u@\h \n\w\n ! \! $ '
+export PS1='\n \e[1;95m \u@\H \e[0;32m\w \n $ \e[0;30m'
 
 # \u User name
 # \w Full path
@@ -40,13 +41,11 @@
 #\[ begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt
 #\] end a sequence of non-printing character
 
-
 ################################################################################
 #
 #                                 OS SPECIFIC SETTINGS                                    
 #
 ################################################################################
-os=`uname`
 if [ $OSTYPE == "Linux" ]
 then :
 else
@@ -54,7 +53,7 @@ else
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
     export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
     # Searches for MacPorts programs 
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export PATH=/opt/local/bin:/opt/local/sbin:~/Projects/enzyme/halign/:$PATH
 fi
 
 
@@ -63,7 +62,12 @@ fi
 #                                       ALIASES  
 #
 ################################################################################
-
 # Use colors when outputting for ls
 alias ls='ls -G'
+
+# Allow egrep to print in color
 alias egrep='egrep --color'
+
+# Add directories to a history file. I intend to use this file to establish a
+# path history to determine where I go.
+alias cd='pwd >> ~/.dirhistory; cd '
