@@ -9,7 +9,14 @@
 #export PS1="\n[\u@\h \W]\$ "
 #export PS1='\n \[\e[0;32m\]\u\[\e[m\]@\H \[\e[1;36m\]\w\[\e[m\] :\n [\d \@] \n\n \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]' 
 #export PS1='\n\u@\h \n\w\n ! \! $ '
-export PS1='\n \e[1;95m \u@\H \e[0;32m\w \n $ \e[0;30m'
+#export PS1='\n \e[1;95m \u@\h \e[0;32m\w \n $ \e[0;30m'
+
+# Prompt is:
+#  USER@HOST DIRECTORY
+#    (X files, X Kb)
+#  $ 
+#
+export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;95m \n    (`ls -1 | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \n $ \e[0;30m'
 
 # \u User name
 # \w Full path
@@ -62,6 +69,7 @@ fi
 #                                       ALIASES  
 #
 ################################################################################
+
 # Use colors when outputting for ls
 alias ls='ls -G'
 
@@ -70,4 +78,7 @@ alias egrep='egrep --color'
 
 # Add directories to a history file. I intend to use this file to establish a
 # path history to determine where I go.
-alias cd='pwd >> ~/.dirhistory; cd '
+#alias cd='pwd >> ~/.dirhistory; cd '
+# ls immediately after changing directories.
+function cd { builtin cd "$@" && ls -F; }
+
