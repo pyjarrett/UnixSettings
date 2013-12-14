@@ -19,6 +19,9 @@ set textwidth=80
 colorscheme solarized
 syntax on
 
+" Scythe Language
+au BufRead,BufNewFile *.scy set filetype=scythe
+
 " Folding
 set autoindent
 set foldmethod=indent
