@@ -58,9 +58,8 @@ then :
 else
     # Update paths because mac can't store things in simple locations
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-    export DOXYGEN_PATH=/Applications/Doxygen.app/Contents/Resources/doxygen
     # Searches for MacPorts programs 
-    export PATH=/opt/local/bin:/opt/local/sbin:~/Projects/enzyme/halign/:$PATH
+    export PATH=/opt/local/bin:/opt/local/sbin:~/Projects/halign/:$PATH
 fi
 
 
@@ -81,4 +80,3 @@ alias egrep='egrep --color'
 #alias cd='pwd >> ~/.dirhistory; cd '
 # ls immediately after changing directories.
 function cd { builtin cd "$@" && ls -F; }
-
