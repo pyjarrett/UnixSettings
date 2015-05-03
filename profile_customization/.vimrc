@@ -16,7 +16,8 @@ set textwidth=80
 
 " Display 
 "colorscheme desert (Kept so I always remember my former color scheme)
-colorscheme solarized
+"colorscheme solarized
+colorscheme wombat
 syntax on
 
 " Scythe Language
@@ -26,7 +27,8 @@ au BufRead,BufNewFile *.scy set filetype=scythe
 set autoindent
 set foldmethod=indent
 set foldlevel=1
-set gfn=Courier\ 10\ Pitch\ 9
+set gfn=Monaco:h12
+
 
 " Saves a bunch of things when saving sessions
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
@@ -47,4 +49,7 @@ if has("gui_running")
     set guioptions-=m
     set guioptions-=T
 endif
+" Tagbar toggle.
+nmap <F8> :TagbarToggle<CR> 
 
+set t_Co=256
