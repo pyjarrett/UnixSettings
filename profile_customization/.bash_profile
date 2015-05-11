@@ -16,7 +16,16 @@
 #    (X files, X Kb)
 #  $ 
 #
-export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;95m \n    (`ls -1 | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \n $ \e[0;30m'
+#export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;95m \n    (`ls -1 | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \n $ \e[0;30m'
+source ~/.git-prompt.sh
+#export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;95m \n    \e[0;32m $ \e[0;30m '
+
+# Prompt shows current login, current dir, (git branch), number/size of files in dir.
+# 
+#  paul@Pauls-MacBook-Pro ~/UnixSettings   (master) 
+#  (4 files,16Kb) 
+# $ 
+export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m (`ls -l | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \n $ \e[0;30m'
 
 # \u User name
 # \w Full path
@@ -80,3 +89,4 @@ alias egrep='egrep --color'
 #alias cd='pwd >> ~/.dirhistory; cd '
 # ls immediately after changing directories.
 function cd { builtin cd "$@" && ls -F; }
+

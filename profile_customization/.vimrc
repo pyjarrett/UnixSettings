@@ -53,3 +53,4 @@ endif
 nmap <F8> :TagbarToggle<CR> 
 
 set t_Co=256
+let g:tagbar_ctags_bin='/usr/bin/etags'
