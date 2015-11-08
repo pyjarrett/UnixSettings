@@ -1,11 +1,18 @@
-screen bash
-title "Movement"
-screen bash
-title "Man"
-screen bash
-title "Editor"
+chdir /Users/paul/GTD/
+screen -t GTD 0 vim projects.markdown
+
+chdir /Users/paul/GradWork/CV/
+screen -t CV 1
+
+chdir "/Users/paul/GradWork/Comp Photo/"
+screen -t "Comp Photo" 2
+
+chdir /Users/paul/GradWork/Robotics/
+screen -t "Robots" 3
 
 hardstatus alwayslastline
 hardstatus alwayslastline '%{= G}[ %{G}%H %{g}][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
 #hardstatus alwayslastline '%{= G}[ %{G}%H %{g}][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g}][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
 #hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %1`%{-}'
+select 0
+redisplay
