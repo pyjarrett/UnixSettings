@@ -33,8 +33,6 @@ set autochdir
 set autoindent
 set foldmethod=indent
 set foldlevel=1
-"set gfn=Monaco:h11
-set gfn=Monaco:h13
 
 " Show line numbers
 set number
@@ -66,6 +64,10 @@ if has("gui_running")
     " Display 
     let terminals = str2nr(system("ps aux | grep Vim | wc -l"))
     "let color_scheme_index = system("python -c 'import random; print random.randint(5,10)'")
+    "
+    "
+    " atom, clearance, pw, fu, sorceror, thor, underwater, underwater-mod, native, northland,
+    " impactjs
     colorscheme summerfruit
     if terminals=="5"
         colorscheme summerfruit
@@ -79,15 +81,24 @@ if has("gui_running")
         colorscheme material
     endif
 
-" Other colorschemes
-" rearden (if I can find this one again)
-" khaki
-" parsec
-" codeschool
+" selenitic
+" atom
+" symfony
+" jellybeans
+" smyck
+
+" Close (Update?)
 " darkspectrum
-" flatlandia
-" itg_flat
+" codeschool
+" void
+
+" Ugh
+" kib_darktango
 " kolor
+" flatlandia
+" 
+" Other colorschemes
+" rearden-steel (xcode colorscheme)
 " 
 "colorscheme desert (Kept so I always remember my former color scheme)
 "colorscheme solarized
@@ -97,10 +108,13 @@ endif
 " Tagbar toggle.
 nmap <F8> :TagbarToggle<CR> 
 
-" Other fonts
-" Consolas, Menlo, 
-map <C-k> :set gfn=Monaco:h11<CR>:set columns=200<CR>:set lines=200<CR>
-map <C-o> :set gfn=Monaco:h13<CR>:set columns=200<CR>:set lines=200<CR>
+" Bad: Courier New, Courier, Andale Mono
+" Good: Menlo, Monaco, PT Mono, Consolas
+set gfn=Consolas:h14
+" map <C-o> :set gfn=Monaco:h11<CR>:set columns=200<CR>:set lines=200<CR>
+" map <C-k> :set gfn=Monaco:h13<CR>:set columns=200<CR>:set lines=200<CR>
+map <C-k> :set gfn=Consolas:h12<CR>:set columns=200<CR>:set lines=200<CR>
+map <C-o> :set gfn=Consolas:h14<CR>:set columns=200<CR>:set lines=200<CR>
 map <C-@> :set columns=200<CR>:set lines=200<CR>
 
 
@@ -115,11 +129,11 @@ autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
 
 
 " python-mode settings
-let g:pymode_rope=0
-let g:pymode_lint_ignore="E501,W601"
+" let g:pymode_rope=0
+" let g:pymode_lint_ignore="E501,W601"
 
 " vim-jedi settings
-let g:jedi#show_call_signatures = "0"
+let g:jedi#show_call_signatures = "2"
 let g:jedi#popup_on_dot = 1
 
 " show a visual line under the cursor's current line
@@ -145,3 +159,9 @@ let g:syntastic_check_on_wq = 0
 " Disable PEP8 checks
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E225,W601'
+let g:syntastic_ignore_files=['.tex']
+
+
+if !has('python')
+    echo "No python support."
+endif
