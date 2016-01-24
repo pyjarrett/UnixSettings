@@ -70,7 +70,7 @@ if has("gui_running")
     " impactjs
     colorscheme summerfruit
     if terminals=="5"
-        colorscheme summerfruit
+        colorscheme seoul256
     elseif terminals=="6"
         colorscheme wombat
     elseif terminals=="7"
@@ -129,8 +129,8 @@ autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
 
 
 " python-mode settings
-" let g:pymode_rope=0
-" let g:pymode_lint_ignore="E501,W601"
+let g:pymode_rope=0
+let g:pymode_lint_ignore="E501,W601"
 
 " vim-jedi settings
 let g:jedi#show_call_signatures = "2"
