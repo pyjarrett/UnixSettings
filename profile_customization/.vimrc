@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Vundle 
+"                                   Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -18,10 +18,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
+Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'majutsushi/tagbar'
-Plugin 'powerline/powerline'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets' " ultisnip snippets
+Bundle 'ervandew/supertab'
 " TODO: Try out Rope.
 " Other plugin examples.
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -40,7 +43,7 @@ filetype plugin indent on    " required
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           VIM SPECIFIC SETTINGS 
+"                           VIM SPECIFIC SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
@@ -110,12 +113,12 @@ endif
 function! PickRandomCS()
     if has("gui_running")
         let s:favorite_schemes = [
-                    \ "atom", 
-                    \ "clearance", 
-                    \ "desert", 
-                    \ "impactjs", 
+                    \ "atom",
+                    \ "clearance",
+                    \ "desert",
+                    \ "impactjs",
                     \ "jellybeans",
-                    \ "native", 
+                    \ "native",
                     \ "selenitic",
                     \ "seoul256",
                     \ "smyck",
@@ -128,7 +131,7 @@ function! PickRandomCS()
                     \ "desert256",
                     \ "grb256",
                     \ "seuol256"]
-    endif 
+    endif
     let random_scheme_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
     execute 'colorscheme ' . s:favorite_schemes[random_scheme_idx]
 endfunction
@@ -143,7 +146,7 @@ if has("gui_running")
 else
     " Tells vim to use 256 colors. Overrides some termcap (?) issues.
     set t_Co=256
-    
+
     " Use background color for clearing. Fixes an issue with tmux not properly displaying bg colors.
     set t_ut=
 endif
@@ -154,8 +157,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Makes vim fill as much space as possible
 function! FillScreen()
-    set columns=200
-    set lines=200
+    " 400 here is an arbitrary number.
+    set columns=400
+    set lines=400
 endfunction
 map <C-@>call FillScreen()<CR>
 
@@ -178,8 +182,8 @@ if has("unix")
     let s:uname = system("uname -s")
     if s:uname =~ "Darwin"
         " Other Good schemes to choose from: Menlo, Monaco, PT Mono, Consolas
-        let g:custom_font_name = "Consolas"
-        let g:custom_font_sizes = [12, 14]
+        let g:custom_font_name = "Monaco"
+        let g:custom_font_sizes = [11, 13]
         let g:custom_font_toggle = 1
         call SetCustomFont()
         call FillScreen()
@@ -193,22 +197,14 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""
 " tagbar.vim: Tagbar toggle.
 let g:tagbar_show_linenumbers = 0
-nmap <F8> :TagbarToggle<CR> 
+nmap <F8> :TagbarToggle<CR>
 
 " TagbarToggle on startup, but need to do it this way because plugins aren't loaded when .vimrc gets read.
 autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
 
-let g:ycm_global_ycm_extra_conf = '/Users/paul/.vim/.ycm_extra_conf.py'
-
-" python-mode settings
-" let g:pymode_rope=0
-" let g:pymode_lint_ignore="E501,W601"
-
-" vim-jedi settings
-" let g:jedi#show_call_signatures = "2"
-" let g:jedi#popup_on_dot = 1
 
 """"""""""""""""""""
 " Syntastic
@@ -222,8 +218,20 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height=5
 
 " Requires: `pip install flake8
-let g:syntastic_python_checkers=['python', 'flake8']
-" Disable some PEP8 checks: line too long (E501)
-let g:syntastic_python_flake8_args='--ignore=E501' 
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501'  " Disable some PEP8 checks: line too long (E501)
 let g:syntastic_ignore_files=['.tex']
 
+
+""""""""""""""""""""
+" you-complete-me
+let g:ycm_global_ycm_extra_conf = '/Users/paul/.vim/.ycm_extra_conf.py'
+
+
+""""""""""""""""""""
+" Ultisnips
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabCrMapping = 0
