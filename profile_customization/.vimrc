@@ -121,7 +121,6 @@ function! PickRandomCS()
                     \ "native",
                     \ "selenitic",
                     \ "seoul256",
-                    \ "smyck",
                     \ "summerfruit",
                     \ "symfony",
                     \ "wombat" ]
@@ -130,7 +129,7 @@ function! PickRandomCS()
                     \ "charged-256",
                     \ "desert256",
                     \ "grb256",
-                    \ "seuol256"]
+                    \ "seoul256"]
     endif
     let random_scheme_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
     execute 'colorscheme ' . s:favorite_schemes[random_scheme_idx]
@@ -225,7 +224,7 @@ let g:syntastic_ignore_files=['.tex']
 
 """"""""""""""""""""
 " you-complete-me
-let g:ycm_global_ycm_extra_conf = '/Users/paul/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 
 """"""""""""""""""""
