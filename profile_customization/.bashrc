@@ -68,7 +68,7 @@ else
     # Update paths because mac can't store things in simple locations
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
     # Searches for MacPorts programs 
-    export PATH=~/Projects/halign/:~/Projects/Jarvis/:$PATH
+    export PATH=~/Projects/halign/:~/Projects/Jarvis/:~/.cargo/bin:~/OpenSource/LLVMCustom/build/bin/:$PATH
 fi
 
 
@@ -99,3 +99,5 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH
 function cd { builtin cd "$@" && ls -F; }
 
 TERM=xterm-256color
+
+alias tags_local_cpp_build='find . -name "*.hpp" -o -name "*.cc" -o -name "*.c" -o -name "*.cpp" -o -name "*.h" -exec etags -a -o tags {} \;'

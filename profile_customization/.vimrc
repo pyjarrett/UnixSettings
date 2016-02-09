@@ -24,7 +24,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " ultisnip snippets
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
+Plugin 'rust-lang/rust.vim'
 " TODO: Try out Rope.
 " Other plugin examples.
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -72,7 +73,7 @@ set autochdir
 " Folding
 set autoindent
 set foldmethod=indent
-set foldlevel=1
+set foldlevel=2
 
 " Show line numbers
 set number
@@ -83,7 +84,8 @@ set noro
 " Saves a bunch of things when saving sessions
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
 
-"set tags=tags;
+" Recursively search for tags files
+set tags=./tags;
 
 " Enables leading modelines in source code.
 set modeline
@@ -93,6 +95,9 @@ set cursorline
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
+
+" Open splits on right instead of left. Helpful with netrw or NERDTree
+set splitright
 
 " Sets NETRW to use tree style
 let g:netrw_liststyle=3
@@ -206,6 +211,11 @@ autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
 
 
 """"""""""""""""""""
+" NERDTREE
+let NERDTreeShowBookmarks = 1
+
+
+""""""""""""""""""""
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -221,6 +231,12 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501'  " Disable some PEP8 checks: line too long (E501)
 let g:syntastic_ignore_files=['.tex']
 
+
+""""""""""""""""""""
+" Rust.vim
+let g:rustfmt_autosave = 1
+let g:rust_conceal = 1
+let g:rust_conceal_mod_path = 1
 
 """"""""""""""""""""
 " you-complete-me
