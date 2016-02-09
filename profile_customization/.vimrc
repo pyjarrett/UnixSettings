@@ -73,7 +73,7 @@ set autochdir
 " Folding
 set autoindent
 set foldmethod=indent
-set foldlevel=2
+set foldlevel=1
 
 " Show line numbers
 set number
@@ -118,16 +118,26 @@ endif
 function! PickRandomCS()
     if has("gui_running")
         let s:favorite_schemes = [
+                    \ "abra",
+                    \ "anotherdark",
                     \ "atom",
+                    \ "candycode",
                     \ "clearance",
                     \ "desert",
+                    \ "distinguished",
+                    \ "h80",
                     \ "impactjs",
+                    \ "jammy",
                     \ "jellybeans",
-                    \ "native",
+                    \ "neverland2-darker",
+                    \ "nightsky",
+                    \ "northsky",
                     \ "selenitic",
+                    \ "solarized",
                     \ "seoul256",
                     \ "summerfruit",
                     \ "symfony",
+                    \ "taqua",
                     \ "wombat" ]
     else
         let s:favorite_schemes = [
@@ -228,7 +238,10 @@ let g:syntastic_loc_list_height=5
 
 " Requires: `pip install flake8
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501'  " Disable some PEP8 checks: line too long (E501)
+" Disable some PEP8 checks
+" E501: Line too long
+" E128: Hanging indent
+let g:syntastic_python_flake8_args='--ignore=E501,E128' 
 let g:syntastic_ignore_files=['.tex']
 
 
