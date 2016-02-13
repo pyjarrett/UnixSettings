@@ -183,7 +183,10 @@ function! FillScreen()
     set columns=400
     set lines=400
 endfunction
-map <C-@>call FillScreen()<CR>
+
+
+map <C-@> :vertical resize 40<CR>:set wfw<CR>
+" map <C-@>call FillScreen()<CR>
 
 
 function! SetCustomFont()
