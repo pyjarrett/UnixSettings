@@ -113,43 +113,51 @@ if !has('python')
     echo "No python support."
 endif
 
+" Builds list of colorschemes to choose from based on current time.
+function! LoadRandomCS()
+if has("gui_running")
+    let currentHour = strftime("%H")
+    if currentHour < 6 || currentHour > 18
+        let s:favorite_schemes = [
+                \ "abra",
+                \ "anotherdark",
+                \ "atom",
+                \ "candycode",
+                \ "clearance",
+                \ "desert",
+                \ "distinguished",
+                \ "impactjs",
+                \ "jammy",
+                \ "jellybeans",
+                \ "neverland2-darker",
+                \ "nightsky",
+                \ "northsky",
+                \ "selenitic",
+                \ "seoul256",
+                \ "symfony",
+                \ "wombat" ]
+    else
+        let s:favorite_schemes = [
+                \ "summerfruit",
+                \ "taqua" ]
+    endif
+else
+    let s:favorite_schemes = [
+                \ "charged-256",
+                \ "desert256",
+                \ "grb256",
+                \ "seoul256"]
+endif
+endfunction
+call LoadRandomCS()
 
 " Allows randomly choosing colorscheme randomly based on environment.
 function! PickRandomCS()
-    if has("gui_running")
-        let s:favorite_schemes = [
-                    \ "abra",
-                    \ "anotherdark",
-                    \ "atom",
-                    \ "candycode",
-                    \ "clearance",
-                    \ "desert",
-                    \ "distinguished",
-                    \ "h80",
-                    \ "impactjs",
-                    \ "jammy",
-                    \ "jellybeans",
-                    \ "neverland2-darker",
-                    \ "nightsky",
-                    \ "northsky",
-                    \ "selenitic",
-                    \ "solarized",
-                    \ "seoul256",
-                    \ "summerfruit",
-                    \ "symfony",
-                    \ "taqua",
-                    \ "wombat" ]
-    else
-        let s:favorite_schemes = [
-                    \ "charged-256",
-                    \ "desert256",
-                    \ "grb256",
-                    \ "seoul256"]
-    endif
-    let random_scheme_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
-    execute 'colorscheme ' . s:favorite_schemes[random_scheme_idx]
+    let s:favorite_schemes_idx = (s:favorite_schemes_idx + 1) % len(s:favorite_schemes)
+    execute 'colorscheme ' . s:favorite_schemes[s:favorite_schemes_idx]
 endfunction
 map <C-k> :call PickRandomCS()<CR>
+let s:favorite_schemes_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
 call PickRandomCS()
 
 
