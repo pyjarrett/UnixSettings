@@ -64,8 +64,9 @@ set hlsearch
 " Enable use of mouse in vim
 set mouse=a
 
-" Pretty formatting for gq to cut text off at column 100.
-set textwidth=100
+" Pretty formatting for gq to cut text off at a set column.
+set textwidth=80
+set colorcolumn=+1
 
 " automatically change window's cwd to file's dir
 set autochdir
@@ -105,6 +106,9 @@ let g:netrw_liststyle=3
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
 
+" Force markdown instead of Modula-2 recognition for md files.
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Environment Specific Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,7 +121,7 @@ endif
 function! LoadRandomCS()
 if has("gui_running")
     let currentHour = strftime("%H")
-    if currentHour < 6 || currentHour > 18
+    if currentHour < 6 || currentHour >= 18
         let s:favorite_schemes = [
                 \ "abra",
                 \ "anotherdark",
