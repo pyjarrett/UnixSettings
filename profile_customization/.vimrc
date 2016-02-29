@@ -254,9 +254,12 @@ let g:syntastic_loc_list_height=5
 " Requires: `pip install flake8
 let g:syntastic_python_checkers=['flake8']
 " Disable some PEP8 checks
-" E501: Line too long
+" E123: closing bracket does not match indentation of opening bracket's line
+" E124: closing bracket does not match visual indentation
+" E125: continuation line over-indented for hanging indent
 " E128: Hanging indent
-let g:syntastic_python_flake8_args='--ignore=E501,E128' 
+" E501: Line too long
+let g:syntastic_python_flake8_args='--ignore=E501,E123,E125,E128' 
 let g:syntastic_ignore_files=['.tex']
 
 
