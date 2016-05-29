@@ -25,7 +25,10 @@ source ~/.git-prompt.sh
 #  paul@Pauls-MacBook-Pro ~/UnixSettings   (master) 
 #  (4 files,16Kb) 
 # $ 
-export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m (`ls -l | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \@ \n $ \e[0;30m'
+
+# export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m (`ls -l | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \@ \n $ \e[0;30m'
+
+export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m \@ \n $ \e[0;30m'
 
 # \u User name
 # \w Full path
@@ -68,7 +71,7 @@ else
     # Update paths because mac can't store things in simple locations
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
     # Searches for MacPorts programs 
-    export PATH=~/Projects/halign/:~/Projects/Jarvis/:~/.cargo/bin:~/OpenSource/LLVMCustom/build/bin/:$PATH
+    export PATH=~/Projects/halign/:~/Projects/Jarvis/:~/.cargo/bin:$PATH
 fi
 
 
@@ -98,6 +101,6 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:$PYTHONPATH
 # ls immediately after changing directories.
 function cd { builtin cd "$@" && ls -F; }
 
-TERM=xterm-256color
-
 alias tags_local_cpp_build='find . -name "*.hpp" -o -name "*.cc" -o -name "*.c" -o -name "*.cpp" -o -name "*.h" -exec etags -a -o tags {} \;'
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

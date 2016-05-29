@@ -26,6 +26,10 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets' " ultisnip snippets
 Plugin 'ervandew/supertab'
 Plugin 'rust-lang/rust.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'noah/vim256-color'
+Plugin 'ctrlpvim/ctrlp.vim'
 " TODO: Try out Rope.
 " Other plugin examples.
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -49,9 +53,9 @@ filetype plugin indent on    " required
 syntax on
 
 " Tabbing
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Get rid of annoying bells
@@ -93,6 +97,7 @@ set modeline
 
 " Show a visual line for the cursor's current line
 set cursorline
+set cursorcolumn
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -126,16 +131,13 @@ if has("gui_running")
                 \ "abra",
                 \ "anotherdark",
                 \ "atom",
-                \ "candycode",
                 \ "clearance",
                 \ "desert",
                 \ "distinguished",
                 \ "impactjs",
-                \ "jammy",
                 \ "jellybeans",
                 \ "neverland2-darker",
                 \ "nightsky",
-                \ "northsky",
                 \ "selenitic",
                 \ "seoul256",
                 \ "symfony",
@@ -148,7 +150,6 @@ if has("gui_running")
 else
     let s:favorite_schemes = [
                 \ "charged-256",
-                \ "desert256",
                 \ "grb256",
                 \ "seoul256"]
 endif
@@ -202,7 +203,6 @@ endfunction
 function! SwapCustomFontSize()
     let g:custom_font_toggle = (g:custom_font_toggle + 1) % len(g:custom_font_sizes)
     call SetCustomFont()
-    call FillScreen()
 endfunction
 
 
@@ -212,10 +212,9 @@ if has("unix")
     if s:uname =~ "Darwin"
         " Other Good schemes to choose from: Menlo, Monaco, PT Mono, Consolas
         let g:custom_font_name = "Monaco"
-        let g:custom_font_sizes = [11, 13]
+        let g:custom_font_sizes = [10, 12]
         let g:custom_font_toggle = 1
         call SetCustomFont()
-        call FillScreen()
         map <C-o> :call SwapCustomFontSize()<CR>
     " else
     " TODO: Add other unix available fonts
@@ -260,7 +259,7 @@ let g:syntastic_python_checkers=['flake8']
 " E128: Hanging indent
 " E501: Line too long
 let g:syntastic_python_flake8_args='--ignore=E501,E123,E125,E128' 
-let g:syntastic_ignore_files=['.tex']
+let g:syntastic_ignore_files=['.tex', '.hpp', '.cpp']
 
 
 """"""""""""""""""""
@@ -281,3 +280,19 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabCrMapping = 0
+
+""""""""""""""""""""
+" nergtree-git-plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+set conceallevel=2
