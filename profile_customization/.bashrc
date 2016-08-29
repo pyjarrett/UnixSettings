@@ -28,7 +28,7 @@ source ~/.git-prompt.sh
 
 # export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m (`ls -l | wc -l | sed "s: ::g"` files, `ls -lah | grep -m 1 total | sed "s/total //"`Kb) \@ \n $ \e[0;30m'
 
-export PS1='\n \e[1;95m \u@\h \e[0;32m\w \e[1;30m $(__git_ps1 " (%s)" ) \n \e[1;95m \@ \n $ \e[0;30m'
+export PS1='\n \[\e[1;95m\] \u@\h \[\e[0;32m\]\w \[\e[1;30m\] $(__git_ps1 " (%s)" ) \n \[\e[1;95m\] \@ \n $ \[\e[0;30m\]'
 
 # \u User name
 # \w Full path
@@ -104,3 +104,5 @@ function cd { builtin cd "$@" && ls -F; }
 alias tags_local_cpp_build='find . -name "*.hpp" -o -name "*.cc" -o -name "*.c" -o -name "*.cpp" -o -name "*.h" -exec etags -a -o tags {} \;'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+set editor-mode vi
+set -o vi

@@ -17,19 +17,22 @@ Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'majutsushi/tagbar'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets' " ultisnip snippets
-Plugin 'ervandew/supertab'
 Plugin 'rust-lang/rust.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'noah/vim256-color'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'           " the ultimate in file search
+Plugin 'freitass/todo.txt-vim'        " todo.txt creation and updates
+Plugin 'kshenoy/vim-signature'
+" http://www.vim.org/scripts/script.php?script_id=2666
+"Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets' " ultisnip snippets
+"Plugin 'ervandew/supertab'
 " TODO: Try out Rope.
 " Other plugin examples.
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -79,6 +82,10 @@ set autochdir
 set autoindent
 set foldmethod=indent
 set foldlevel=1
+set foldcolumn=4
+
+" Enables spell checking in comments.
+set spell spelllang=en_us
 
 " Show line numbers
 set number
@@ -91,6 +98,7 @@ set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpo
 
 " Recursively search for tags files
 set tags=./tags;
+set dictionary=/usr/share/dict/words
 
 " Enables leading modelines in source code.
 set modeline
@@ -98,6 +106,9 @@ set modeline
 " Show a visual line for the cursor's current line
 set cursorline
 set cursorcolumn
+
+" Highlights the current word under the cursor
+autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -113,6 +124,10 @@ let python_highlight_all = 1
 
 " Force markdown instead of Modula-2 recognition for md files.
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+let maplocalleader='\'
+
+set conceallevel=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Environment Specific Settings
@@ -149,8 +164,6 @@ if has("gui_running")
     endif
 else
     let s:favorite_schemes = [
-                \ "charged-256",
-                \ "grb256",
                 \ "seoul256"]
 endif
 endfunction
@@ -271,7 +284,9 @@ let g:rust_conceal_mod_path = 1
 """"""""""""""""""""
 " you-complete-me
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
+let g:ycm_rust_src_path = '/Users/paul/Projects/Rust/rust/src/'
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 """"""""""""""""""""
 " Ultisnips
@@ -295,4 +310,3 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-set conceallevel=2

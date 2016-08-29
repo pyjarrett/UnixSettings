@@ -1,5 +1,6 @@
 # Partially stolen from https://bitbucket.org/mblum/libgp/src/2537ea7329ef/.ycm_extra_conf.py
 import os
+import subprocess
 import ycm_core
 
 # These are the compilation flags that will be used in case there's no
@@ -19,27 +20,24 @@ flags = [
     # a "-std=<something>".
     # For a C project, you would set this to something like 'c99' instead of
     # 'c++11'.
-    '-std=c++11',
+    '-std=c++14',
     # ...and the same thing goes for the magic -x option which specifies the
     # language that the files to be compiled are written in. This is mostly
     # relevant for c++ headers.
     # For a C project, you would set this to 'c' instead of 'c++'.
     '-x', 'c++',
-    # '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/',
     # This path will only work on OS X, but extra paths that don't exist are not harmful
-    '-isystem', '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/',
-    # '-isystem', '/System/Library/Frameworks/Python.framework/Headers',
     # '-isystem', '/usr/local/include',
-    # '-isystem', '/usr/local/include/eigen3',
     # '-isystem', '/usr/local/include/c++/5.2.0/',
-    '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/',
-    '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/7.0.2/include',
-    '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include',
-    '-isystem', '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks',
     '-I', 'include',
     '-I', '/usr/local/include',
     '-I.'
 ]
+
+include_directories = subprocess.check_output("echo | clang -v -E -x c++ - 2>&1 | sed -n '/#include/,/End of search list/p' | grep -v -e '#include .* search starts here' -e 'End of search list' | grep -v 'framework directory'", shell=True).split()
+for line in include_directories:
+    flags.append('-isystem')
+    flags.append(line.strip())
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
