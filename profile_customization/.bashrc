@@ -106,3 +106,5 @@ alias tags_local_cpp_build='find . -name "*.hpp" -o -name "*.cc" -o -name "*.c" 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 set editor-mode vi
 set -o vi
+
+alias git-dog='git log --all --decorate --oneline --graph'

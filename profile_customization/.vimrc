@@ -28,6 +28,7 @@ Plugin 'noah/vim256-color'
 Plugin 'ctrlpvim/ctrlp.vim'           " the ultimate in file search
 Plugin 'freitass/todo.txt-vim'        " todo.txt creation and updates
 Plugin 'kshenoy/vim-signature'
+Plugin 'mlr-msft/vim-loves-dafny'
 " http://www.vim.org/scripts/script.php?script_id=2666
 "Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
 "Plugin 'SirVer/ultisnips'
@@ -272,7 +273,7 @@ let g:syntastic_python_checkers=['flake8']
 " E128: Hanging indent
 " E501: Line too long
 let g:syntastic_python_flake8_args='--ignore=E501,E123,E125,E128' 
-let g:syntastic_ignore_files=['.tex', '.hpp', '.cpp']
+let g:syntastic_ignore_files=['.tex', '.hpp', '.cpp', '.dfy']
 
 
 """"""""""""""""""""
