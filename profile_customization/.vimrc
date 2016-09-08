@@ -87,6 +87,7 @@ set foldcolumn=4
 
 " Enables spell checking in comments.
 set spell spelllang=en_us
+nmap <F9> :set spell!<CR>
 
 " Show line numbers
 set number
@@ -109,7 +110,27 @@ set cursorline
 set cursorcolumn
 
 " Highlights the current word under the cursor
-autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+let g:highlight_current_keyword = 0
+function! ToggleKeywordHighlight()
+  if g:highlight_current_keyword == 0
+    augroup highlight_keyword
+      au!
+      autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+    augroup END
+    let g:highlight_current_keyword = 1
+  else
+    augroup highlight_keyword
+      au!
+    augroup END
+    match none
+    let g:highlight_current_keyword = 0
+  end
+endfunction
+nmap <F10> :call ToggleKeywordHighlight()<CR>
+call ToggleKeywordHighlight()
+
+" for mark.vim simplify clearing marks
+nmap <F4> :MarkClear<CR>
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
