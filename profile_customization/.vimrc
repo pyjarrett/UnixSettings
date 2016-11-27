@@ -136,6 +136,9 @@ let maplocalleader='\'
 " Hides concealed text unless a replacement letter is defined.
 set conceallevel=2
 
+" Makes conceal take operator highlighting after colorscheme change.
+autocmd ColorScheme * highlight! link Conceal Operator
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Environment Specific Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -258,6 +261,10 @@ call ToggleKeywordHighlight()
 """"""""""""""""""""
 " Who thought tagbar showing line numbers was a good idea?
 let g:tagbar_show_linenumbers = 0
+
+""""""""""""""""""""
+" NERDTREE
+let NERDTreeShowBookmarks = 1
 
 " TagbarToggle on startup, but need to do it this way because plugins aren't
 " loaded when .vimrc gets read.
