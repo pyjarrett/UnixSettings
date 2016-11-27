@@ -84,7 +84,7 @@ set autoindent
 
 " 'indent' is also acceptable here... can't remember why I had it chosen as
 " indent over syntax.  rustfmt forces a bad corner here as it screws with
-" indenting.
+" indenting, but it's the community standard, so just roll with it.
 " TODO: Possibly make this chosen based on file types.
 set foldmethod=syntax 
 set foldlevel=1
@@ -181,7 +181,6 @@ function! PickRandomCS()
     let s:favorite_schemes_idx = (s:favorite_schemes_idx + 1) % len(s:favorite_schemes)
     execute 'colorscheme ' . s:favorite_schemes[s:favorite_schemes_idx]
 endfunction
-map <C-k> :call PickRandomCS()<CR>
 let s:favorite_schemes_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
 call PickRandomCS()
 
@@ -194,7 +193,8 @@ else
     " Tells vim to use 256 colors. Overrides some termcap (?) issues.
     set t_Co=256
 
-    " Use background color for clearing. Fixes an issue with tmux not properly displaying bg colors.
+    " Use background color for clearing. Fixes an issue with tmux not properly
+    " displaying bg colors.
     set t_ut=
 endif
 
@@ -259,7 +259,8 @@ call ToggleKeywordHighlight()
 " Who thought tagbar showing line numbers was a good idea?
 let g:tagbar_show_linenumbers = 0
 
-" TagbarToggle on startup, but need to do it this way because plugins aren't loaded when .vimrc gets read.
+" TagbarToggle on startup, but need to do it this way because plugins aren't
+" loaded when .vimrc gets read.
 autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb,rs} TagbarToggle
 
 """"""""""""""""""""
@@ -324,7 +325,6 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remapped function keys
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -338,6 +338,10 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F9> :call ToggleKeywordHighlight()<CR>
 nmap <F10> :set spell!<CR>
 nmap <C-o> :call SwapCustomFontSize()<CR>
+
+" Sometimes changing colorschemes is all you need to do to jolt your mind to
+" rethink the problem.
+nmap <C-k> :call PickRandomCS()<CR>
 
 " Idea here was to lock NERDTree on the left side.
 "nmap <C-@> :vertical resize 40<CR>:set wfw<CR>
