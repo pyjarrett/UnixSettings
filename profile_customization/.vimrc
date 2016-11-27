@@ -87,7 +87,7 @@ set foldcolumn=4
 
 " Enables spell checking in comments.
 set spell spelllang=en_us
-nmap <F9> :set spell!<CR>
+nmap <F10> :set spell!<CR>
 
 " Show line numbers
 set number
@@ -126,11 +126,13 @@ function! ToggleKeywordHighlight()
     let g:highlight_current_keyword = 0
   end
 endfunction
-nmap <F10> :call ToggleKeywordHighlight()<CR>
+nmap <F9> :call ToggleKeywordHighlight()<CR>
 call ToggleKeywordHighlight()
 
 " for mark.vim simplify clearing marks
 nmap <F4> :MarkClear<CR>
+
+nmap <F2> :set foldlevel=2<CR>
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -267,6 +269,9 @@ nmap <F8> :TagbarToggle<CR>
 
 " TagbarToggle on startup, but need to do it this way because plugins aren't loaded when .vimrc gets read.
 autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
+
+" Makes conceal take operator highlighting after colorscheme change.
+autocmd ColorScheme * highlight! link Conceal Operator
 
 
 """"""""""""""""""""
