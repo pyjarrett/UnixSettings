@@ -81,15 +81,19 @@ set autochdir
 
 " Folding
 set autoindent
-set foldmethod=indent
+
+" 'indent' is also acceptable here... can't remember why I had it chosen as
+" indent over syntax.  rustfmt forces a bad corner here as it screws with
+" indenting.
+" TODO: Possibly make this chosen based on file types.
+set foldmethod=syntax 
 set foldlevel=1
-set foldcolumn=4
+set foldcolumn=4  " shows 4 levels of folding in left gutter.
 
 " Enables spell checking in comments.
 set spell spelllang=en_us
-nmap <F9> :set spell!<CR>
 
-" Show line numbers
+" Show line numbers, since they make jumping around easier.
 set number
 
 " Prevents Read-Only Diff
@@ -100,6 +104,8 @@ set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpo
 
 " Recursively search for tags files
 set tags=./tags;
+
+" Dictionary completion?  Awesome!  CTRL-X + CTRL-K  for dictionary completion.
 set dictionary=/usr/share/dict/words
 
 " Enables leading modelines in source code.
@@ -109,33 +115,10 @@ set modeline
 set cursorline
 set cursorcolumn
 
-" Highlights the current word under the cursor
-let g:highlight_current_keyword = 0
-function! ToggleKeywordHighlight()
-  if g:highlight_current_keyword == 0
-    augroup highlight_keyword
-      au!
-      autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-    augroup END
-    let g:highlight_current_keyword = 1
-  else
-    augroup highlight_keyword
-      au!
-    augroup END
-    match none
-    let g:highlight_current_keyword = 0
-  end
-endfunction
-nmap <F10> :call ToggleKeywordHighlight()<CR>
-call ToggleKeywordHighlight()
-
-" for mark.vim simplify clearing marks
-nmap <F4> :MarkClear<CR>
-
 " show the matching part of the pair for [] {} and ()
 set showmatch
 
-" Open splits on right instead of left. Helpful with netrw or NERDTree
+" Open splits on right instead of left. Helpful with netrw or NERDTree.
 set splitright
 
 " Sets NETRW to use tree style
@@ -147,8 +130,10 @@ let python_highlight_all = 1
 " Force markdown instead of Modula-2 recognition for md files.
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 
+" Use '\' as the leader character for specialized commands (e.g. mark.vim)
 let maplocalleader='\'
 
+" Hides concealed text unless a replacement letter is defined.
 set conceallevel=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,7 +148,7 @@ endif
 function! LoadRandomCS()
 if has("gui_running")
     let currentHour = strftime("%H")
-    if currentHour < 6 || currentHour >= 18
+    if currentHour < 10 || currentHour >= 16
         let s:favorite_schemes = [
                 \ "abra",
                 \ "anotherdark",
@@ -224,22 +209,15 @@ function! FillScreen()
     set lines=400
 endfunction
 
-
-map <C-@> :vertical resize 40<CR>:set wfw<CR>
-" map <C-@>call FillScreen()<CR>
-
-
 function! SetCustomFont()
     execute 'set gfn=' . g:custom_font_name . ':h' . string(get(g:custom_font_sizes, g:custom_font_toggle))
 endfunction
-
 
 " Lets me swap between a large and small font while filling screen at the same time.
 function! SwapCustomFontSize()
     let g:custom_font_toggle = (g:custom_font_toggle + 1) % len(g:custom_font_sizes)
     call SetCustomFont()
 endfunction
-
 
 " Builds a big and small font size to toggle between.
 if has("unix")
@@ -250,29 +228,39 @@ if has("unix")
         let g:custom_font_sizes = [10, 12]
         let g:custom_font_toggle = 1
         call SetCustomFont()
-        map <C-o> :call SwapCustomFontSize()<CR>
     " else
     " TODO: Add other unix available fonts
     endif
 endif
 
+" Highlights the current word under the cursor
+let g:highlight_current_keyword = 0
+function! ToggleKeywordHighlight()
+  if g:highlight_current_keyword == 0
+    augroup highlight_keyword
+      au!
+      autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+    augroup END
+    let g:highlight_current_keyword = 1
+  else
+    augroup highlight_keyword
+      au!
+    augroup END
+    match none
+    let g:highlight_current_keyword = 0
+  end
+endfunction
+call ToggleKeywordHighlight()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""
-" tagbar.vim: Tagbar toggle.
+" Who thought tagbar showing line numbers was a good idea?
 let g:tagbar_show_linenumbers = 0
-nmap <F8> :TagbarToggle<CR>
 
 " TagbarToggle on startup, but need to do it this way because plugins aren't loaded when .vimrc gets read.
-autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb} TagbarToggle
-
-
-""""""""""""""""""""
-" NERDTREE
-let NERDTreeShowBookmarks = 1
-
+autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb,rs} TagbarToggle
 
 """"""""""""""""""""
 " Syntastic
@@ -296,12 +284,11 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E123,E125,E128' 
 let g:syntastic_ignore_files=['.tex', '.hpp', '.cpp', '.dfy']
 
-
 """"""""""""""""""""
 " Rust.vim
 let g:rustfmt_autosave = 1
-let g:rust_conceal = 1
-let g:rust_conceal_mod_path = 1
+let g:rust_conceal = 0
+let g:rust_conceal_mod_path = 0
 
 """"""""""""""""""""
 " you-complete-me
@@ -312,6 +299,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 """"""""""""""""""""
 " Ultisnips
+" Had bad luck with Ultisnips in the past.  Keeping it here to revisit... maybe.
+""""""""""""""""""""
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -319,7 +308,10 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " let g:SuperTabCrMapping = 0
 
 """"""""""""""""""""
-" nergtree-git-plugin
+" NERDTREE
+let NERDTreeShowBookmarks = 1
+""""""""""""""""""""
+" nerdtree-git-plugin
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -332,3 +324,23 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remapped function keys
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" for mark.vim simplify clearing marks
+nmap <F2> :set foldlevel=2<CR>
+nmap <F4> :MarkClear<CR>
+nmap <F8> :TagbarToggle<CR>
+
+" Makes disabling simple, because these tend to be a performance bottleneck on
+" really, really, long files.
+nmap <F9> :call ToggleKeywordHighlight()<CR>
+nmap <F10> :set spell!<CR>
+nmap <C-o> :call SwapCustomFontSize()<CR>
+
+" Idea here was to lock NERDTree on the left side.
+"nmap <C-@> :vertical resize 40<CR>:set wfw<CR>
+
+" Maximizing MacVim on Mac is painful.
+nmap <C-@> :call FillScreen()<CR>
