@@ -139,6 +139,12 @@ set conceallevel=2
 " Makes conceal take operator highlighting after colorscheme change.
 autocmd ColorScheme * highlight! link Conceal Operator
 
+" Auto-comment addition causes me more trouble than I like.  Insert-mode comment
+" header addition seems ok, but it's incredibly irritating for 'O' or 'o' in
+" normal mode.
+" http://superuser.com/questions/271023/vim-can-i-disable-continuation-of-comments-to-the-next-line
+autocmd BufNewFile,BufRead * setlocal formatoptions-=o formatoptions+=cr
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Environment Specific Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
