@@ -268,6 +268,21 @@ call ToggleKeywordHighlight()
 " Who thought tagbar showing line numbers was a good idea?
 let g:tagbar_show_linenumbers = 0
 
+" Set up tagbar for Rust
+ let g:tagbar_type_rust = {
+\ 'ctagstype' : 'rust',
+\ 'kinds' : [
+    \'T:types,type definitions',
+    \'f:functions,function definitions',
+    \'g:enum,enumeration names',
+    \'s:structure names',
+    \'m:modules,module names',
+    \'c:consts,static constants',
+    \'t:traits,traits',
+    \'i:impls,trait implementations',
+\]
+\}
+
 """"""""""""""""""""
 " NERDTREE
 let NERDTreeShowBookmarks = 1
@@ -307,7 +322,7 @@ let g:rust_conceal_mod_path = 0
 """"""""""""""""""""
 " you-complete-me
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_rust_src_path = '/Users/paul/Projects/Rust/rust/src/'
+let g:ycm_rust_src_path = '/Users/paul/Projects/rust/src/'
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 
