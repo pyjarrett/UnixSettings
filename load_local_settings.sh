@@ -1,3 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Loads local settings into this directory
-cp ~/.bash_profile ~/.bashrc ~/.vimrc ~/.screenrc ~/.ycm_extra_conf.py ~/.tmux.conf profile_customization/
+echo "Loading local settings..."
+for x in `ls -A profile_customization/`; do
+  cp ~/$x profile_customization/
+  echo "... $x"
+done
+echo "done"
