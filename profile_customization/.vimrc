@@ -129,6 +129,8 @@ let python_highlight_all = 1
 
 " Force markdown instead of Modula-2 recognition for md files.
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd FileType markdown set nonumber foldcolumn=0
+autocmd BufEnter todo.txt set nonumber foldcolumn=0
 
 " Use '\' as the leader character for specialized commands (e.g. mark.vim)
 let maplocalleader='\'
@@ -257,9 +259,19 @@ function! ToggleKeywordHighlight()
     augroup END
     match none
     let g:highlight_current_keyword = 0
-  end
+  endif
 endfunction
 call ToggleKeywordHighlight()
+
+function! ToggleFoldColumnsAndNumbering()
+  if &foldcolumn == 4
+    set foldcolumn=0
+    set nonumber
+  else
+    set foldcolumn=4
+    set number
+  endif
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           PLUGIN SETTINGS
@@ -322,7 +334,7 @@ let g:rust_conceal_mod_path = 0
 """"""""""""""""""""
 " you-complete-me
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_rust_src_path = '/Users/paul/Projects/rust/src/'
+let g:ycm_rust_src_path = '/Users/paul/Projects/Rust/rust/src/'
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -358,6 +370,7 @@ let g:NERDTreeIndicatorMapCustom = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " for mark.vim simplify clearing marks
 nmap <F2> :set foldlevel=2<CR>
+nmap <F3> :call ToggleFoldColumnsAndNumbering()<CR>
 nmap <F4> :MarkClear<CR>
 nmap <F8> :TagbarToggle<CR>
 
