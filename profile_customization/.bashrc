@@ -108,3 +108,4 @@ set editor-mode vi
 set -o vi
 
 alias git-dog='git log --all --decorate --oneline --graph'
+alias git-y-diff='git difftool -y -x "colordiff -y -W $COLUMNS" | less -R'
