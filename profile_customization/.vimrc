@@ -362,6 +362,7 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 """"""""""""""""""""
 " NERDTREE
 let NERDTreeShowBookmarks = 1
+
 """"""""""""""""""""
 " nerdtree-git-plugin
 let g:NERDTreeIndicatorMapCustom = {
