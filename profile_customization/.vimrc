@@ -295,6 +295,16 @@ let g:tagbar_show_linenumbers = 0
 \]
 \}
 
+" Set up tagbar for markdown.
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+
 """"""""""""""""""""
 " NERDTREE
 let NERDTreeShowBookmarks = 1
