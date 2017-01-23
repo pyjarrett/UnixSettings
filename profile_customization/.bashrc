@@ -72,6 +72,8 @@ else
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
     # Searches for MacPorts programs 
     export PATH=~/Projects/halign/:~/Projects/Jarvis/:~/.cargo/bin:$PATH
+
+    alias lock='pmset displaysleepnow'
 fi
 
 
