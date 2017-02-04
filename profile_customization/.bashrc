@@ -111,3 +111,7 @@ set -o vi
 
 alias git-dog='git log --all --decorate --oneline --graph'
 alias git-y-diff='git difftool -y -x "colordiff -y -W $COLUMNS" | less -R'
+
+export HISTCONTROL=erasedups
+export HISTTIMEFORMAT='%F %T  '
+export HISTIGNORE='ls -l:pwd:date:'
