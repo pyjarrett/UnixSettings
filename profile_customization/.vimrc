@@ -29,6 +29,7 @@ Plugin 'ctrlpvim/ctrlp.vim'           " the ultimate in file search
 Plugin 'freitass/todo.txt-vim'        " todo.txt creation and updates
 Plugin 'kshenoy/vim-signature'
 Plugin 'mlr-msft/vim-loves-dafny'
+Plugin 'Yggdroot/indentLine'
 " http://www.vim.org/scripts/script.php?script_id=2666
 "Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
 "Plugin 'SirVer/ultisnips'
@@ -374,6 +375,20 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+
+""""""""""""""""""""
+" IndentLine
+""""""""""""""""""""
+" Vim
+let g:indentLine_color_term = 239
+
+"GVim
+let g:indentLine_color_gui = '#A4E57E'
+
+" none X terminal
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remapped function keys
