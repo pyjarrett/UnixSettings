@@ -152,7 +152,7 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=o formatoptions+=cr
 "                       Environment Specific Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Courtesy warning to inform me python-enabled plugins won't work.
-if !has('python')
+if !has('python3')
     echo "No python support."
 endif
 
