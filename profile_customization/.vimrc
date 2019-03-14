@@ -58,10 +58,10 @@ filetype plugin indent on    " required
 syntax on
 
 " Tabbing
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set softtabstop=2
-set expandtab
+set noexpandtab
 
 " Get rid of annoying bells
 set noerrorbells visualbell t_vb=
@@ -170,7 +170,6 @@ if has("gui_running")
                 \ "distinguished",
                 \ "impactjs",
                 \ "jellybeans",
-                \ "neverland2-darker",
                 \ "nightsky",
                 \ "selenitic",
                 \ "seoul256",
@@ -199,8 +198,7 @@ call PickRandomCS()
 
 if has("gui_running")
     " Removes menu and tab bars when graphical
-    set guioptions-=m
-    set guioptions-=T
+    set guioptions=
 else
     " Tells vim to use 256 colors. Overrides some termcap (?) issues.
     set t_Co=256
@@ -221,8 +219,12 @@ function! FillScreen()
     set lines=400
 endfunction
 
+if has("gui_running")
+	call FillScreen()
+endif
+
 function! SetCustomFont()
-    execute 'set gfn=' . g:custom_font_name . ':h' . string(get(g:custom_font_sizes, g:custom_font_toggle))
+    execute 'set gfn=' . g:custom_font_name . '\ ' . string(get(g:custom_font_sizes, g:custom_font_toggle))
 endfunction
 
 " Lets me swap between a large and small font while filling screen at the same time.
@@ -242,6 +244,11 @@ if has("unix")
         call SetCustomFont()
     " else
     " TODO: Add other unix available fonts
+    else
+        let g:custom_font_name = "Ubuntu\\ Mono"
+        let g:custom_font_sizes = [10, 12]
+        let g:custom_font_toggle = 1
+        call SetCustomFont()
     endif
 endif
 
