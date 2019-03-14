@@ -1,56 +1,12 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Vundle
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" Keep Plugin commands between vundle#begin/end.
-" alternatively, pass a path where Vundle should install plugins
-Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle, required
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'majutsushi/tagbar'
-Plugin 'rust-lang/rust.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'noah/vim256-color'
-Plugin 'ctrlpvim/ctrlp.vim'           " the ultimate in file search
-Plugin 'freitass/todo.txt-vim'        " todo.txt creation and updates
-Plugin 'kshenoy/vim-signature'
-Plugin 'mlr-msft/vim-loves-dafny'
-Plugin 'Yggdroot/indentLine'
-" http://www.vim.org/scripts/script.php?script_id=2666
-"Plugin 'davidhalter/jedi-vim' " alternative to YCM for python
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets' " ultisnip snippets
-"Plugin 'ervandew/supertab'
-" TODO: Try out Rope.
-" Other plugin examples.
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-call vundle#end()            " required
-filetype plugin indent on    " required
 
+" REQUIRE MANUAL INTERVENTION TO ALLOW POTENTIALLY UNSAFE FEATURES
+"if filereadable(expand('~/.vimrc.unsafe'))
+"    source ~/.vimrc.unsafe
+"else
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+    filetype plugin indent on     " required
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           VIM SPECIFIC SETTINGS
@@ -109,9 +65,6 @@ set tags=./tags;
 " Dictionary completion?  Awesome!  CTRL-X + CTRL-K  for dictionary completion.
 set dictionary=/usr/share/dict/words
 
-" Enables leading modelines in source code.
-set modeline
-
 " Show a visual line for the cursor's current line
 set cursorline
 set cursorcolumn
@@ -158,32 +111,32 @@ endif
 
 " Builds list of colorschemes to choose from based on current time.
 function! LoadRandomCS()
-if has("gui_running")
-    let currentHour = strftime("%H")
-    if currentHour < 10 || currentHour >= 16
-        let s:favorite_schemes = [
-                \ "abra",
-                \ "anotherdark",
-                \ "atom",
-                \ "clearance",
-                \ "desert",
-                \ "distinguished",
-                \ "impactjs",
-                \ "jellybeans",
-                \ "nightsky",
-                \ "selenitic",
-                \ "seoul256",
-                \ "symfony",
-                \ "wombat" ]
+    if has("gui_running")
+        let currentHour = strftime("%H")
+        if currentHour < 10 || currentHour >= 16
+            let s:favorite_schemes = [
+                    \ "abra",
+                    \ "anotherdark",
+                    \ "atom",
+                    \ "clearance",
+                    \ "desert",
+                    \ "distinguished",
+                    \ "impactjs",
+                    \ "jellybeans",
+                    \ "nightsky",
+                    \ "selenitic",
+                    \ "seoul256",
+                    \ "symfony",
+                    \ "wombat" ]
+        else
+            let s:favorite_schemes = [
+                    \ "summerfruit",
+                    \ "taqua" ]
+        endif
     else
         let s:favorite_schemes = [
-                \ "summerfruit",
-                \ "taqua" ]
+                    \ "seoul256"]
     endif
-else
-    let s:favorite_schemes = [
-                \ "seoul256"]
-endif
 endfunction
 call LoadRandomCS()
 
@@ -194,7 +147,6 @@ function! PickRandomCS()
 endfunction
 let s:favorite_schemes_idx = str2nr(system("echo $RANDOM")) % len(s:favorite_schemes)
 call PickRandomCS()
-
 
 if has("gui_running")
     " Removes menu and tab bars when graphical
@@ -208,48 +160,45 @@ else
     set t_ut=
 endif
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                   Font and View Control
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Makes vim fill as much space as possible
-function! FillScreen()
-    " 400 here is an arbitrary number.
-    set columns=400
-    set lines=400
-endfunction
-
 if has("gui_running")
-	call FillScreen()
-endif
+    " Makes vim fill as much space as possible
+    function! FillScreen()
+        " 400 here is an arbitrary number.
+        set columns=400
+        set lines=400
+    endfunction
 
-function! SetCustomFont()
-    execute 'set gfn=' . g:custom_font_name . '\ ' . string(get(g:custom_font_sizes, g:custom_font_toggle))
-endfunction
+    function! SetCustomFont()
+        execute 'set gfn=' . g:custom_font_name . '\ ' . string(get(g:custom_font_sizes, g:custom_font_toggle))
+    endfunction
 
-" Lets me swap between a large and small font while filling screen at the same time.
-function! SwapCustomFontSize()
-    let g:custom_font_toggle = (g:custom_font_toggle + 1) % len(g:custom_font_sizes)
-    call SetCustomFont()
-endfunction
-
-" Builds a big and small font size to toggle between.
-if has("unix")
-    let s:uname = system("uname -s")
-    if s:uname =~ "Darwin"
-        " Other Good schemes to choose from: Menlo, Monaco, PT Mono, Consolas
-        let g:custom_font_name = "Monaco"
-        let g:custom_font_sizes = [10, 12]
-        let g:custom_font_toggle = 1
+    " Lets me swap between a large and small font while filling screen at the same time.
+    function! SwapCustomFontSize()
+        let g:custom_font_toggle = (g:custom_font_toggle + 1) % len(g:custom_font_sizes)
         call SetCustomFont()
-    " else
-    " TODO: Add other unix available fonts
-    else
-        let g:custom_font_name = "Ubuntu\\ Mono"
-        let g:custom_font_sizes = [10, 12]
-        let g:custom_font_toggle = 1
-        call SetCustomFont()
+    endfunction
+
+    " Builds a big and small font size to toggle between.
+    if has("unix")
+        let s:uname = system("uname -s")
+        if s:uname =~ "Darwin"
+            " Other Good schemes to choose from: Menlo, Monaco, PT Mono, Consolas
+            let g:custom_font_name = "Monaco"
+            let g:custom_font_sizes = [10, 12]
+            let g:custom_font_toggle = 1
+        else
+            let g:custom_font_name = "Ubuntu\\ Mono"
+            let g:custom_font_sizes = [10, 12]
+            let g:custom_font_toggle = 1
+        endif
     endif
+
+    call SetCustomFont()
+    call FillScreen()
+    nmap <C-o> :call SwapCustomFontSize()<CR>
 endif
 
 " Highlights the current word under the cursor
@@ -281,122 +230,9 @@ function! ToggleFoldColumnsAndNumbering()
   endif
 endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           PLUGIN SETTINGS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""
-" Who thought tagbar showing line numbers was a good idea?
-let g:tagbar_show_linenumbers = 0
-
-" Set up tagbar for Rust
- let g:tagbar_type_rust = {
-\ 'ctagstype' : 'rust',
-\ 'kinds' : [
-    \'T:types,type definitions',
-    \'f:functions,function definitions',
-    \'g:enum,enumeration names',
-    \'s:structure names',
-    \'m:modules,module names',
-    \'c:consts,static constants',
-    \'t:traits,traits',
-    \'i:impls,trait implementations',
-\]
-\}
-
-" Set up tagbar for markdown.
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
-    \ ]
-\ }
-
 """"""""""""""""""""
 " NERDTREE
 let NERDTreeShowBookmarks = 1
-
-" TagbarToggle on startup, but need to do it this way because plugins aren't
-" loaded when .vimrc gets read.
-autocmd VimEnter *.{py,tex,cpp,c,h,hpp,rb,rs} TagbarToggle
-
-""""""""""""""""""""
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=5
-
-" Requires: `pip install flake8
-let g:syntastic_python_checkers=['flake8']
-" Disable some PEP8 checks
-" E123: closing bracket does not match indentation of opening bracket's line
-" E124: closing bracket does not match visual indentation
-" E125: continuation line over-indented for hanging indent
-" E128: Hanging indent
-" E501: Line too long
-let g:syntastic_python_flake8_args='--ignore=E501,E123,E125,E128' 
-let g:syntastic_ignore_files=['.tex', '.hpp', '.cpp', '.dfy']
-
-""""""""""""""""""""
-" Rust.vim
-let g:rustfmt_autosave = 1
-let g:rust_conceal = 0
-let g:rust_conceal_mod_path = 0
-
-""""""""""""""""""""
-" you-complete-me
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_rust_src_path = '/Users/paul/Projects/Rust/rust/src/'
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-""""""""""""""""""""
-" Ultisnips
-" Had bad luck with Ultisnips in the past.  Keeping it here to revisit... maybe.
-""""""""""""""""""""
-" make YCM compatible with UltiSnips (using supertab)
-" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-" let g:SuperTabCrMapping = 0
-
-""""""""""""""""""""
-" NERDTREE
-let NERDTreeShowBookmarks = 1
-
-""""""""""""""""""""
-" nerdtree-git-plugin
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
-
-""""""""""""""""""""
-" IndentLine
-""""""""""""""""""""
-" Vim
-let g:indentLine_color_term = 239
-
-"GVim
-let g:indentLine_color_gui = '#A4E57E'
-
-" none X terminal
-let g:indentLine_color_tty_light = 7 " (default: 4)
-let g:indentLine_color_dark = 1 " (default: 2)
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remapped function keys
@@ -404,14 +240,11 @@ let g:indentLine_color_dark = 1 " (default: 2)
 " for mark.vim simplify clearing marks
 nmap <F2> :set foldlevel=2<CR>
 nmap <F3> :call ToggleFoldColumnsAndNumbering()<CR>
-nmap <F4> :MarkClear<CR>
-nmap <F8> :TagbarToggle<CR>
 
 " Makes disabling simple, because these tend to be a performance bottleneck on
 " really, really, long files.
 nmap <F9> :call ToggleKeywordHighlight()<CR>
 nmap <F10> :set spell!<CR>
-nmap <C-o> :call SwapCustomFontSize()<CR>
 
 " Sometimes changing colorschemes is all you need to do to jolt your mind to
 " rethink the problem.
