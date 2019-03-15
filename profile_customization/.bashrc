@@ -56,28 +56,28 @@ set -o vi
 # https://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
 case "$(uname -s)" in
   Linux)
-	# Use colors when outputting for ls
-	alias ls='ls --color=always'
-	;;
+    # Use colors when outputting for ls
+    alias ls='ls --color=always'
+    ;;
 
   # I don't use mac right now, but in case I need to again.
   Darwin)
     # Update paths because mac can't store things in simple locations
     alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 
-	# Force screen locking
+    # Force screen locking
     alias lock='pmset displaysleepnow'
 
     # Use colors when outputting for ls
     alias ls='ls -G'
-	;;
+    ;;
 
   CYGWIN*|MINGW32*|MSYS*)
-	;;
+    ;;
 
   *)
-	echo 'Unknown OS'
-	;;
+    echo 'Unknown OS'
+    ;;
 esac
 
 ################################################################################
