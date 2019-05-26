@@ -77,6 +77,9 @@ set showmatch
 " Open splits on right instead of left. Helpful with netrw or NERDTree.
 set splitright
 
+" Use :set list to show whitespace
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
 " Sets NETRW to use tree style
 let g:netrw_liststyle=3
 
@@ -257,5 +260,3 @@ nmap <C-k> :call PickRandomCS()<CR>
 
 " Maximizing MacVim on Mac is painful.
 nmap <C-@> :call FillScreen()<CR>
-" Use :set list to show whitespace
-:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
