@@ -257,3 +257,5 @@ nmap <C-k> :call PickRandomCS()<CR>
 
 " Maximizing MacVim on Mac is painful.
 nmap <C-@> :call FillScreen()<CR>
+" Use :set list to show whitespace
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
